@@ -50,11 +50,17 @@ public class Statistics {
 
             if (fullStat) {
                 sumInt += num;
-                if (num > maxInt) {
+                // инициализация мин и макс при первом элементе
+                if (integers.size() == 1) {
                     maxInt = num;
-                }
-                if (num < minInt) {
                     minInt = num;
+                } else {
+                    if (num > maxInt) {
+                        maxInt = num;
+                    }
+                    if (num < minInt) {
+                        minInt = num;
+                    }
                 }
             }
         } catch (NumberFormatException e) {
@@ -69,11 +75,16 @@ public class Statistics {
 
             if (fullStat) {
                 sumFloat += num;
-                if (num > maxFloat) {
+                if (floats.size() == 1) {
                     maxFloat = num;
-                }
-                if (num < minFloat) {
                     minFloat = num;
+                } else {
+                    if (num > maxFloat) {
+                        maxFloat = num;
+                    }
+                    if (num < minFloat) {
+                        minFloat = num;
+                    }
                 }
             }
         } catch (NumberFormatException e) {
@@ -86,17 +97,22 @@ public class Statistics {
 
         if (fullStat) {
             int length = line.length();
-            if (length > maxStringLength) {
+            if (strings.size() == 1) {
                 maxStringLength = length;
-            }
-            if (length < minStringLength) {
                 minStringLength = length;
+            } else {
+                if (length > maxStringLength) {
+                    maxStringLength = length;
+                }
+                if (length < minStringLength) {
+                    minStringLength = length;
+                }
             }
         }
     }
 
     public void createFiles(String prefix, String path) {
-        // проверка директории
+
         File dir = new File(path);
         if (!dir.exists()) {
             dir.mkdirs();
@@ -139,6 +155,10 @@ public class Statistics {
     public void printStatistics(boolean shortStat, boolean fullStat) {
         System.out.println("\n=== СТАТИСТИКА ===");
 
+        if (appendMode) {
+            System.out.println("(Режим добавления - статистика только для текущего запуска)");
+        }
+
         if (!integers.isEmpty()) {
             System.out.println("\nЦелые числа:");
             System.out.println("  Количество: " + integers.size());
@@ -175,6 +195,10 @@ public class Statistics {
 
         if (integers.isEmpty() && floats.isEmpty() && strings.isEmpty()) {
             System.out.println("Данные для обработки не найдены.");
+        }
+
+        if (appendMode) {
+            System.out.println("\nДанные добавлены к существующим файлам.");
         }
     }
 }

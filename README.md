@@ -131,5 +131,12 @@ consectetur adipiscing<br>
 Нормальная форма числа с плавающей запятой<br>
 Long
 
+## Пример полной команды с дальнейшим режимом append
+```bash
+java -jar target/file-filter.jar -f -o /Users/anita/Documents/output/ -p result_ /Users/anita/Documents/input/in1.txt   
+```
 
+```bash
+java -jar target/file-filter.jar -f -a -o /Users/anita/Documents/output/ -p result_ /Users/anita/Documents/input/in2.txt 
+```
 
